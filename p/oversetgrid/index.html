@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Total test for mathematic/code/image input">
-<title>综合测试</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="重叠网格技术的详细原理和应用">
+<title>CFD算法 - 重叠网格技术</title>
 
-<link rel='canonical' href='http://localhost:1313/p/test-chinese/'>
+<link rel='canonical' href='http://localhost:1313/p/oversetgrid/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="综合测试">
-<meta property='og:description' content="Total test for mathematic/code/image input">
-<meta property='og:url' content='http://localhost:1313/p/test-chinese/'>
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="CFD算法 - 重叠网格技术">
+<meta property='og:description' content="重叠网格技术的详细原理和应用">
+<meta property='og:url' content='http://localhost:1313/p/oversetgrid/'>
 <meta property='og:site_name' content='Zecorre000的博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='浸没边界法' /><meta property='article:tag' content='多相流' /><meta property='article:published_time' content='2020-09-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2020-09-09T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
-<meta name="twitter:title" content="综合测试">
-<meta name="twitter:description" content="Total test for mathematic/code/image input"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='网格生成' /><meta property='article:tag' content='重叠网格' /><meta property='article:published_time' content='2025-05-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-05-31T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/oversetgrid/cfd_mesh.jpg' />
+<meta name="twitter:title" content="CFD算法 - 重叠网格技术">
+<meta name="twitter:description" content="重叠网格技术的详细原理和应用"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/oversetgrid/cfd_mesh.jpg' />
     <link rel="shortcut icon" href="/image/favicon.ico" />
 
     </head>
@@ -280,11 +280,19 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#文字测试">文字测试</a></li>
-    <li><a href="#数学公式测试">数学公式测试</a></li>
-    <li><a href="#代码插入测试">代码插入测试</a></li>
-    <li><a href="#引用">引用</a></li>
-    <li><a href="#图片">图片</a></li>
+    <li><a href="#21-网格生成">2.1 网格生成</a></li>
+    <li><a href="#22-网格挖洞和装配">2.2 网格挖洞和装配</a>
+      <ol>
+        <li><a href="#221-初始网格中网格点分类">2.2.1 初始网格中网格点分类</a></li>
+        <li><a href="#222-网格的挖洞和装配">2.2.2 网格的挖洞和装配</a></li>
+      </ol>
+    </li>
+    <li><a href="#23-插值与计算">2.3 插值与计算</a>
+      <ol>
+        <li><a href="#231-inverse-distance">2.3.1 Inverse Distance</a></li>
+        <li><a href="#232-cell-volume-weight">2.3.2 Cell Volume Weight</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -299,13 +307,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/test-chinese/">
-                <img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_e5aaa5f0b7bd07e9.jpg"
-                        srcset="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_e5aaa5f0b7bd07e9.jpg 800w, /p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_c99ba9c80ceee4b3.jpg 1600w"
+            <a href="/p/oversetgrid/">
+                <img src="/p/oversetgrid/cfd_mesh_hu_833acac929dafd4e.jpg"
+                        srcset="/p/oversetgrid/cfd_mesh_hu_833acac929dafd4e.jpg 800w, /p/oversetgrid/cfd_mesh_hu_7ebd34d531373836.jpg 1600w"
                         width="800" 
-                        height="600" 
+                        height="393" 
                         loading="lazy"
-                        alt="Featured image of post 综合测试" />
+                        alt="Featured image of post CFD算法 - 重叠网格技术" />
                 
             </a>
         </div>
@@ -319,17 +327,21 @@
                 OpenFOAM学习记录
             </a>
         
+            <a href="/categories/cfd%E7%AE%97%E6%B3%95/" style="background-color: #2a9d8f; color: #fff;">
+                CFD算法
+            </a>
+        
     </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/test-chinese/">综合测试</a>
+            <a href="/p/oversetgrid/">CFD算法 - 重叠网格技术</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Total test for mathematic/code/image input
+            重叠网格技术的详细原理和应用
         </h3>
         
     </div>
@@ -350,7 +362,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Sep 09, 2020</time>
+                <time class="article-time--published">May 31, 2025</time>
             </div>
         
 
@@ -365,7 +377,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -380,18 +392,82 @@
     <section class="article-content">
     
     
-    <h1 id="正文测试">正文测试
-</h1><h2 id="文字测试">文字测试
-</h2><p>这是一段文字</p>
-<h2 id="数学公式测试">数学公式测试
-</h2><p>Navier-Stokes方程:
+    <h1 id="一-重叠网格概述">一 重叠网格概述
+</h1><p>重叠网格（Overlapping grids），又名Chimera网格或嵌套网格（Overset grids），是一种用以处理复杂的网格运动和解决复杂几何体动网格问题的<strong>区域分割与网格组合策略</strong>。在该类方法中，网格被分为多个相互重叠嵌套的网格区域，其中贴体网格部分随网格运动，计算在各个网格区域上分别进行，各部分网格之间通过插值进行信息传递。</p>
+<p>重叠网格的实质，是<strong>通过局部重叠的方式将一套或多套贴体子网格与背景网格进行组装配合，生成一套网格并借助插值过程实现计算</strong>。在实际应用中，重叠网格方法包括<strong>网格生成</strong>、<strong>网格挖洞和装配</strong>和<strong>插值与计算</strong>三个主要步骤。本文将以该步骤为顺序，以OpenFOAM ESI版本中的重叠网格方法为例分别详细解释各个步骤的原理和实现。</p>
+<h1 id="二-重叠网格流程">二 重叠网格流程
+</h1><h2 id="21-网格生成">2.1 网格生成
+</h2><p>重叠网格体系中，生成的网格主要包括以下两类：</p>
+<ul>
+<li>
+<p>背景网格：用于定义计算域，设置网格背景和计算域边界条件</p>
+</li>
+<li>
+<p>组件网格：用于贴合内部壁面，设置壁面边界条件</p>
+</li>
+</ul>
+<p>其中，在动网格情况下，组件网格随物体壁面运动而运动，背景网格静止。</p>
+<p>网格的生成已有多种成熟的技术。在OpenFOAM中，贴体网格的生成可以通过<em>snappyHexMesh</em>功能实现。分别生成两套网格后，网格通过<em>mergeMeshes</em>命令进行结合，而后可借助<em>topoSet</em>定义重叠区域。</p>
+<p>相关前处理流程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mergeMeshes -overwrite 组件网格 背景网格
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cd 组件网格
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">checkMesh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">topoSet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里值得注意的是，在使用多套重叠网格时，若某点有多层重叠，topoSet中regionToCell会优先选中region0，即mergeMeshes的第一个参数。该指定目前尚无自定义选项可以改变，而这一特性会影响topoSet对region的选定。需要仔细确认topoSet定义region的逻辑，从而确定mergeMeshes的参数顺序。</p>
+<h2 id="22-网格挖洞和装配">2.2 网格挖洞和装配
+</h2><h3 id="221-初始网格中网格点分类">2.2.1 初始网格中网格点分类
+</h3><p>经过网格生成和组合的初始网格，其中的网格点被分为以下几类：</p>
+<ul>
+<li>洞内点：从计算网格中被剔除，不参与计算的点</li>
+<li>插值点：位于重叠区域内，计算时需要从其他点插值获取流场信息的点</li>
+<li>计算点：直接参与计算的点</li>
+</ul>
+<p>其中，洞内点的产生是由于网格重叠后，部分网格位于计算边界外或被重复计算无需保留。剔除这一部分网格的过程被称为<strong>挖洞</strong>过程。在重叠网格的计算中，网格之间通过插值的方式相互传递信息，参与插值的点称为插值点；其余直接参与计算的点称为计算点。</p>
+<img src="3points.png" alt="Image Alt Text" style="width: 100%; height: auto;">
+<center style="font-size:14px;color:#C0C0C0;text-decoration:underline">Peng L, Zhenxun G, Chongwen J. The progress of the overlapping grid techniques[J]. Mechanics in Engineering, 2014, 36(5): 551-565.</center>
+<h3 id="222-网格的挖洞和装配">2.2.2 网格的挖洞和装配
+</h3><p>网格的装配过程，实质上是建立网格之间插值通信关系的过程。该部分的细节会在后续章节中详细介绍。</p>
+<p>以OpenFOAM ESI v2212中教程算例twoSimpleRotors为例，说明重叠网格计算中挖洞和网格装配过程。OpenFOAM以cellType变量标识上述网格类型，其中0对应计算网格，1对应插值网格，2对应洞内网格。</p>
+<img src="cellType1.png" alt="Image Alt Text" style="width: 100%; height: auto;">
+<img src="cellType2.png" alt="Image Alt Text" style="width: 100%; height: auto;">
+<p>上图中分别展示了组件网格和背景网格的挖洞和插值网格分布情况。可见在背景网格中，以组件网格壁面向外拓展的一部分网格被挖洞，洞边界上的网格中变量信息由插值得到；对于组件网格，其与背景网格的重叠边界上的信息由背景网格向其插值得到。</p>
+<h2 id="23-插值与计算">2.3 插值与计算
+</h2><p>组件网格和背景网格之间的插值实现方法较多。OpenFOAM中，主要使用的格式包括基于网格距离的inverse distance方法和基于网格之间重叠体积关系的Cell Volume Weight方法。</p>
+<h3 id="231-inverse-distance">2.3.1 Inverse Distance
+</h3><p>该方法基本思路是以贡献网格（Donor）和被插值网格（acceptor）之间的距离为基础加权插值。</p>
+<img src="inverseD.png" alt="Image Alt Text" style="width: 50%; height: auto;">
+<p>对于图中情况，各个贡献网格的权重表示为：
 </p>
 $$
-\rho(\frac{\partial \bold{U}}{\partial t}+\bold{U}\cdot\nabla\bold{U})=-\nabla P+\rho \bold{g}+\bold{f}
+\omega_i=\frac{1/|d_i|}{S}
+$$<p>其中$S$为距离绝对值倒数之和：
+</p>
+$$
+S=\Sigma\frac{1}{|d_i|}
 $$<p>
-其中$\bold{g}$为重力加速度，$\bold{f}$为体积力。</p>
-<h2 id="代码插入测试">代码插入测试
-</h2><p>下面是OpenFOAM9中pimpleFoam求解器速度方程求解代码</p>
+被插值网格上插值变量$\phi$由是表示为：
+</p>
+$$
+\phi_{a}=\Sigma \omega_i \phi_i
+$$<p>
+该方法具有二阶精度，但无法保证守恒。</p>
+<p>OpenFOAM中使用Inverse Distance计算权重的函数如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -416,110 +492,104 @@ $$<p>
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">MRF</span><span class="p">.</span><span class="n">correctBoundaryVelocity</span><span class="p">(</span><span class="n">U</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">tmp</span><span class="o">&lt;</span><span class="n">fvVectorMatrix</span><span class="o">&gt;</span> <span class="n">tUEqn</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Foam</span><span class="o">::</span><span class="n">cellCellStencils</span><span class="o">::</span><span class="n">inverseDistance</span><span class="o">::</span><span class="n">stencilWeights</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fvm</span><span class="o">::</span><span class="n">ddt</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="o">+</span> <span class="n">fvm</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="o">+</span> <span class="n">MRF</span><span class="p">.</span><span class="n">DDt</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="o">+</span> <span class="n">turbulence</span><span class="o">-&gt;</span><span class="n">divDevSigma</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"> <span class="o">==</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fvModels</span><span class="p">.</span><span class="n">source</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">fvVectorMatrix</span><span class="o">&amp;</span> <span class="n">UEqn</span> <span class="o">=</span> <span class="n">tUEqn</span><span class="p">.</span><span class="n">ref</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">UEqn</span><span class="p">.</span><span class="n">relax</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fvConstraints</span><span class="p">.</span><span class="n">constrain</span><span class="p">(</span><span class="n">UEqn</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">pimple</span><span class="p">.</span><span class="n">momentumPredictor</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">sample</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">pointList</span><span class="o">&amp;</span> <span class="n">donorCcs</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scalarList</span><span class="o">&amp;</span> <span class="n">weights</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="k">const</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">solve</span><span class="p">(</span><span class="n">UEqn</span> <span class="o">==</span> <span class="o">-</span><span class="n">fvc</span><span class="o">::</span><span class="n">grad</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Inverse-distance weighting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">weights</span><span class="p">.</span><span class="n">setSize</span><span class="p">(</span><span class="n">donorCcs</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scalar</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">forAll</span><span class="p">(</span><span class="n">donorCcs</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">scalar</span> <span class="n">d</span> <span class="o">=</span> <span class="n">mag</span><span class="p">(</span><span class="n">sample</span><span class="o">-</span><span class="n">donorCcs</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">fvConstraints</span><span class="p">.</span><span class="n">constrain</span><span class="p">(</span><span class="n">U</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="n">ROOTVSMALL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scalar</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Short circuit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">weights</span> <span class="o">=</span> <span class="n">scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scalar</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">forAll</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="引用">引用
-</h2><blockquote>
-<p>思念是最暖的忧伤像一双翅膀<br>
-让我停不了飞不远在过往游荡<br>
-不告而别的你 就算为了我着想<br>
-这么沉痛的呵护 我怎么能翱翔</p>
-<p><em><a class="link" href="https://www.youtube.com/watch?v=3aypp_YlBzI"  target="_blank" rel="noopener"
-    >最暖的憂傷 - 田馥甄</a></em></p></blockquote>
-<h2 id="图片">图片
-</h2><p><img src="/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash.jpg"
-	width="667"
-	height="1000"
-	srcset="/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e98fca2b4272416e.jpg 480w, /p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e3d37c9ded115b12.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Florian Klauer on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="66"
-		data-flex-basis="160px"
-	
->  <img src="/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash.jpg"
-	width="1000"
-	height="667"
-	srcset="/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_e13c58d5189f892c.jpg 480w, /p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_8fc948b7ee525251.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Luca Bravo on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="149"
-		data-flex-basis="359px"
-	
-></p>
-<p><img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg"
-	width="1000"
-	height="750"
-	srcset="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_503c0ebcc5245e10.jpg 480w, /p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_48c98de55fb3c999.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Helena Hertz on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="133"
-		data-flex-basis="320px"
-	
->  <img src="/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash.jpg"
-	width="667"
-	height="1000"
-	srcset="/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_f81a3588c5c4a663.jpg 480w, /p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_1c52ba2a4ad7b9a0.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Hudai Gayiran on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="66"
-		data-flex-basis="160px"
-	
-></p>
+</div><h3 id="232-cell-volume-weight">2.3.2 Cell Volume Weight
+</h3><p>该方法基于源网格单元与目标单元<strong>相交部分的体积比例</strong>确定插值权重。加权过程与Inverse Distance类似，权重函数表示为：
+</p>
+$$
+\omega_i=\frac{V^o_i}{V_a}
+$$<p>
+其中，$V_i^o$为贡献网格与被插值网格重叠的体积，$V_a$为被插值网格总体积。</p>
+<p>相较于Inverse Distance，该类方法能够保证质量守恒（$\Sigma \omega_i=1$），但是计算消耗和复杂度都较高，并且仅具有一阶精度。</p>
+<h1 id="三-openfoam-重叠网格计算流程">三 OpenFOAM 重叠网格计算流程
+</h1><p>以下伪代码说明OpenFOAM中计算重叠网格的流程，引用修改自<a class="link" href="https://www.sciencedirect.com/science/article/pii/S002980182301853X"  target="_blank" rel="noopener"
+    >Wang, Dongxu, and Sheng Dong, OE2023</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">![<span class="nt">Photo by Florian Klauer on Unsplash</span>](<span class="na">florian-klauer-nptLmg6jqDo-unsplash.jpg</span>)  ![<span class="nt">Photo by Luca Bravo on Unsplash</span>](<span class="na">luca-bravo-alS7ewQ41M8-unsplash.jpg</span>) 
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Start the PIMPLE outer loop
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">![<span class="nt">Photo by Helena Hertz on Unsplash</span>](<span class="na">helena-hertz-wWZzXlDpMog-unsplash.jpg</span>)  ![<span class="nt">Photo by Hudai Gayiran on Unsplash</span>](<span class="na">hudai-gayiran-3Od_VKcDEAA-unsplash.jpg</span>)
+</span></span><span class="line"><span class="cl">	Solve structure motion equation
+</span></span><span class="line"><span class="cl">	Update the mesh (and cell stencil) as per the structure motion
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	Solve the VOF equation (isoAdvector with the source added, see Subsection 2.2)
+</span></span><span class="line"><span class="cl">	Construct the velocity coefficient matrix (the momentum predictor is not performed)
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	Start the PIMPLE inner loop
+</span></span><span class="line"><span class="cl">		Solve the pressure Possion equation (solve prgh from the governing equation)
+</span></span><span class="line"><span class="cl">		Update the velocity and pressure fields explicitly
+</span></span><span class="line"><span class="cl">	End the PIMPLE inner loop if converged
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	Solve the turbulence equation if the present outer loop is the last loop
+</span></span><span class="line"><span class="cl">	End the PIMPLE outer loop if converged or the maximum outer loop number is reached
+</span></span><span class="line"><span class="cl">End the current time step, and then enter the next time step
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>相册语法来自 <a class="link" href="https://typlog.com/"  target="_blank" rel="noopener"
-    >Typlog</a></p>
-
+</div>
 </section>
 
 
@@ -527,9 +597,9 @@ $$<p>
     
     <section class="article-tags">
         
-            <a href="/tags/%E6%B5%B8%E6%B2%A1%E8%BE%B9%E7%95%8C%E6%B3%95/">浸没边界法</a>
+            <a href="/tags/%E7%BD%91%E6%A0%BC%E7%94%9F%E6%88%90/">网格生成</a>
         
-            <a href="/tags/%E5%A4%9A%E7%9B%B8%E6%B5%81/">多相流</a>
+            <a href="/tags/%E9%87%8D%E5%8F%A0%E7%BD%91%E6%A0%BC/">重叠网格</a>
         
     </section>
 
@@ -589,23 +659,23 @@ $$<p>
             
                 
 <article class="has-image">
-    <a href="/p/oversetgrid/">
+    <a href="/p/test-chinese/">
         
         
             <div class="article-image">
-                <img src="/p/oversetgrid/cfd_mesh.d61beca7387a6bffcf7b81a973e112dd_hu_29db34d2531abc1b.jpg" 
+                <img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.46f61e8ea6a2df8fc5bf1d24a17c44a6_hu_57b7cab9514860c.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post CFD算法 - 重叠网格技术"
-                        data-key="oversetGrid" 
-                        data-hash="md5-1hvspzh6a//Pe4Gpc&#43;ES3Q==">
+                        alt="Featured image of post 综合测试"
+                        data-key="test-chinese" 
+                        data-hash="md5-RvYejqai34/Fvx0koXxEpg==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">CFD算法 - 重叠网格技术</h2>
+            <h2 class="article-title">综合测试</h2>
         </div>
     </a>
 </article>
