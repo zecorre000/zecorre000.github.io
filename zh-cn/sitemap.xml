@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,20 +28,23 @@
                 href="http://localhost:1313/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/cfd%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/tags/cfd%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/oversetgrid/</loc>
-    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/categories/cfd%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/p/simple1/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/openfoam%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -52,6 +55,12 @@
                 hreflang="zh-cn"
                 href="http://localhost:1313/tags/"
                 />
+  </url><url>
+    <loc>http://localhost:1313/tags/%E6%89%8B%E6%92%95%E6%B1%82%E8%A7%A3%E5%99%A8/</loc>
+    <lastmod>2025-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/p/oversetgrid/</loc>
+    <lastmod>2025-05-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/%E7%BD%91%E6%A0%BC%E7%94%9F%E6%88%90/</loc>
     <lastmod>2025-05-31T00:00:00+00:00</lastmod>

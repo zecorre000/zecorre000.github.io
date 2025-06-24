@@ -7,10 +7,10 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Zecorre000</copyright>
-        <lastBuildDate>Sat, 31 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 20 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CFD算法</title>
         <link>http://localhost:1313/categories/cfd%E7%AE%97%E6%B3%95/</link>
-        <pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/categories/cfd%E7%AE%97%E6%B3%95/</guid>
         <description>&lt;img src="http://localhost:1313/categories/cfd%E7%AE%97%E6%B3%95/CFD.jpg" alt="Featured image of post CFD算法" /&gt;</description>
@@ -18,7 +18,7 @@
         <item>
         <title>OpenFOAM学习记录</title>
         <link>http://localhost:1313/categories/openfoam%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-        <pubDate>Sat, 31 May 2025 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 20 Jun 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/categories/openfoam%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
         <description>&lt;img src="http://localhost:1313/categories/openfoam%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/OIP.jpg" alt="Featured image of post OpenFOAM学习记录" /&gt;</description>

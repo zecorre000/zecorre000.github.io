@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Total test for mathematic/code/image input">
-<title>综合测试</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="SIMPLE算法的基本思路和求解流程">
+<title>CFD算法 - SIMPLE(1)：基础思路</title>
 
-<link rel='canonical' href='http://localhost:1313/p/test-chinese/'>
+<link rel='canonical' href='http://localhost:1313/p/simple1/'>
 
-<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="综合测试">
-<meta property='og:description' content="Total test for mathematic/code/image input">
-<meta property='og:url' content='http://localhost:1313/p/test-chinese/'>
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="CFD算法 - SIMPLE(1)：基础思路">
+<meta property='og:description' content="SIMPLE算法的基本思路和求解流程">
+<meta property='og:url' content='http://localhost:1313/p/simple1/'>
 <meta property='og:site_name' content='Zecorre000的博客'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='浸没边界法' /><meta property='article:tag' content='多相流' /><meta property='article:published_time' content='2020-09-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2020-09-09T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
-<meta name="twitter:title" content="综合测试">
-<meta name="twitter:description" content="Total test for mathematic/code/image input"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='手撕求解器' /><meta property='article:tag' content='CFD基础' /><meta property='article:published_time' content='2025-06-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-06-20T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/simple1/cfd.jpg' />
+<meta name="twitter:title" content="CFD算法 - SIMPLE(1)：基础思路">
+<meta name="twitter:description" content="SIMPLE算法的基本思路和求解流程"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/simple1/cfd.jpg' />
     <link rel="shortcut icon" href="/image/favicon.ico" />
 
     </head>
@@ -280,11 +280,8 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#文字测试">文字测试</a></li>
-    <li><a href="#数学公式测试">数学公式测试</a></li>
-    <li><a href="#代码插入测试">代码插入测试</a></li>
-    <li><a href="#引用">引用</a></li>
-    <li><a href="#图片">图片</a></li>
+    <li><a href="#21-从简化到实际">2.1 从简化到实际</a></li>
+    <li><a href="#22-以压力为媒压力修正法">2.2 以压力为媒：压力修正法</a></li>
   </ol>
 </nav>
         </div>
@@ -299,13 +296,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/test-chinese/">
-                <img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_e5aaa5f0b7bd07e9.jpg"
-                        srcset="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_e5aaa5f0b7bd07e9.jpg 800w, /p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_c99ba9c80ceee4b3.jpg 1600w"
+            <a href="/p/simple1/">
+                <img src="/p/simple1/cfd_hu_3ff9a1b06be7efb8.jpg"
+                        srcset="/p/simple1/cfd_hu_3ff9a1b06be7efb8.jpg 800w, /p/simple1/cfd_hu_a1748f91fc767fe6.jpg 1600w"
                         width="800" 
-                        height="600" 
+                        height="533" 
                         loading="lazy"
-                        alt="Featured image of post 综合测试" />
+                        alt="Featured image of post CFD算法 - SIMPLE(1)：基础思路" />
                 
             </a>
         </div>
@@ -319,17 +316,21 @@
                 OpenFOAM学习记录
             </a>
         
+            <a href="/categories/cfd%E7%AE%97%E6%B3%95/" style="background-color: #2a9d8f; color: #fff;">
+                CFD算法
+            </a>
+        
     </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/test-chinese/">综合测试</a>
+            <a href="/p/simple1/">CFD算法 - SIMPLE(1)：基础思路</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Total test for mathematic/code/image input
+            SIMPLE算法的基本思路和求解流程
         </h3>
         
     </div>
@@ -350,7 +351,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Sep 09, 2020</time>
+                <time class="article-time--published">Jun 20, 2025</time>
             </div>
         
 
@@ -365,7 +366,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -380,145 +381,66 @@
     <section class="article-content">
     
     
-    <h1 id="正文测试">正文测试
-</h1><h2 id="文字测试">文字测试
-</h2><p>这是一段文字</p>
-<h2 id="数学公式测试">数学公式测试
-</h2><p>Navier-Stokes方程:
+    <h1 id="一-simple算法概述">一 SIMPLE算法概述
+</h1><p>SIMPLE（<strong>S</strong>emi-<strong>I</strong>mplicit <strong>M</strong>ethod for <strong>P</strong>ressure <strong>L</strong>inked <strong>E</strong>quations），全称压力耦合方程组半隐式求解方法，是一种针对不可压NS方程，通过数值上解耦速度和压力实现求解的算法，常常用于求解稳态流动问题。</p>
+<p>本文及后续SIMPLE系列文章来源于笔者近期的学习经历，介绍SIMPLE的基本实现和思路，并通过这一计算流体力学中经典的算法，窥见CFD求解中的部分基础思想和常见方法。</p>
+<h1 id="二-simple算法理解">二 SIMPLE算法理解
+</h1><h2 id="21-从简化到实际">2.1 从简化到实际
+</h2><p>我们以流体力学中经典的benchmark——二维Poiseuille流为例。考虑完全发展、定常的槽道流，动量方程可以写为：
 </p>
 $$
-\rho(\frac{\partial \bold{U}}{\partial t}+\bold{U}\cdot\nabla\bold{U})=-\nabla P+\rho \bold{g}+\bold{f}
+\frac{d}{dy}\ ( \mu\frac{dU}{dy} )-P_x=0
 $$<p>
-其中$\bold{g}$为重力加速度，$\bold{f}$为体积力。</p>
-<h2 id="代码插入测试">代码插入测试
-</h2><p>下面是OpenFOAM9中pimpleFoam求解器速度方程求解代码</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">MRF</span><span class="p">.</span><span class="n">correctBoundaryVelocity</span><span class="p">(</span><span class="n">U</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">tmp</span><span class="o">&lt;</span><span class="n">fvVectorMatrix</span><span class="o">&gt;</span> <span class="n">tUEqn</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fvm</span><span class="o">::</span><span class="n">ddt</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="o">+</span> <span class="n">fvm</span><span class="o">::</span><span class="n">div</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="o">+</span> <span class="n">MRF</span><span class="p">.</span><span class="n">DDt</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="o">+</span> <span class="n">turbulence</span><span class="o">-&gt;</span><span class="n">divDevSigma</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"> <span class="o">==</span>
-</span></span><span class="line"><span class="cl">    <span class="n">fvModels</span><span class="p">.</span><span class="n">source</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">fvVectorMatrix</span><span class="o">&amp;</span> <span class="n">UEqn</span> <span class="o">=</span> <span class="n">tUEqn</span><span class="p">.</span><span class="n">ref</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">UEqn</span><span class="p">.</span><span class="n">relax</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">fvConstraints</span><span class="p">.</span><span class="n">constrain</span><span class="p">(</span><span class="n">UEqn</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">pimple</span><span class="p">.</span><span class="n">momentumPredictor</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">solve</span><span class="p">(</span><span class="n">UEqn</span> <span class="o">==</span> <span class="o">-</span><span class="n">fvc</span><span class="o">::</span><span class="n">grad</span><span class="p">(</span><span class="n">p</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">fvConstraints</span><span class="p">.</span><span class="n">constrain</span><span class="p">(</span><span class="n">U</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="引用">引用
-</h2><blockquote>
-<p>思念是最暖的忧伤像一双翅膀<br>
-让我停不了飞不远在过往游荡<br>
-不告而别的你 就算为了我着想<br>
-这么沉痛的呵护 我怎么能翱翔</p>
-<p><em><a class="link" href="https://www.youtube.com/watch?v=3aypp_YlBzI"  target="_blank" rel="noopener"
-    >最暖的憂傷 - 田馥甄</a></em></p></blockquote>
-<h2 id="图片">图片
-</h2><p><img src="/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash.jpg"
-	width="667"
-	height="1000"
-	srcset="/p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e98fca2b4272416e.jpg 480w, /p/test-chinese/florian-klauer-nptLmg6jqDo-unsplash_hu_e3d37c9ded115b12.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Florian Klauer on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="66"
-		data-flex-basis="160px"
-	
->  <img src="/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash.jpg"
-	width="1000"
-	height="667"
-	srcset="/p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_e13c58d5189f892c.jpg 480w, /p/test-chinese/luca-bravo-alS7ewQ41M8-unsplash_hu_8fc948b7ee525251.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Luca Bravo on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="149"
-		data-flex-basis="359px"
-	
-></p>
-<p><img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.jpg"
-	width="1000"
-	height="750"
-	srcset="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_503c0ebcc5245e10.jpg 480w, /p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash_hu_48c98de55fb3c999.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Helena Hertz on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="133"
-		data-flex-basis="320px"
-	
->  <img src="/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash.jpg"
-	width="667"
-	height="1000"
-	srcset="/p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_f81a3588c5c4a663.jpg 480w, /p/test-chinese/hudai-gayiran-3Od_VKcDEAA-unsplash_hu_1c52ba2a4ad7b9a0.jpg 1024w"
-	loading="lazy"
-	
-		alt="Photo by Hudai Gayiran on Unsplash"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="66"
-		data-flex-basis="160px"
-	
-></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">![<span class="nt">Photo by Florian Klauer on Unsplash</span>](<span class="na">florian-klauer-nptLmg6jqDo-unsplash.jpg</span>)  ![<span class="nt">Photo by Luca Bravo on Unsplash</span>](<span class="na">luca-bravo-alS7ewQ41M8-unsplash.jpg</span>) 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">![<span class="nt">Photo by Helena Hertz on Unsplash</span>](<span class="na">helena-hertz-wWZzXlDpMog-unsplash.jpg</span>)  ![<span class="nt">Photo by Hudai Gayiran on Unsplash</span>](<span class="na">hudai-gayiran-3Od_VKcDEAA-unsplash.jpg</span>)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>相册语法来自 <a class="link" href="https://typlog.com/"  target="_blank" rel="noopener"
-    >Typlog</a></p>
+该动量方程无比简洁，运用小学知识即可将其离散为一维的差分方程并直观地数值求解；为了更高的数值精度，也可采用半网格方法处理粘性系数。若考虑均匀粘性的层流情况，$ \mu=cons.$，该方程甚至有经典的抛物线分布理论解。</p>
+<p>然而，若要考虑流动在整个管道中的分布，必须考虑流动入口处非均匀的速度、压力分布。此时，垂直于流动方向的速度是不可忽略的。完整的二维动量方程形如（忽略体积力）：
+</p>
+$$
+\rho\left(\frac{\partial u}{\partial t}+u \frac{\partial u}{\partial x}+v \frac{\partial u}{\partial y}\right)=-\frac{\partial p}{\partial x}+\frac{\partial}{\partial x}\left(2 \mu \frac{\partial u}{\partial x}\right)+\frac{\partial}{\partial y}\left[\mu\left(\frac{\partial u}{\partial y}+\frac{\partial v}{\partial x}\right)\right]
+$$$$
+\rho\left(\frac{\partial v}{\partial t}+u \frac{\partial v}{\partial x}+v \frac{\partial v}{\partial y}\right)=-\frac{\partial p}{\partial y}+\frac{\partial}{\partial y}\left(2 \mu \frac{\partial u}{\partial y}\right)+\frac{\partial}{\partial x}\left[\mu\left(\frac{\partial u}{\partial y}+\frac{\partial v}{\partial x}\right)\right]
+$$<p>其中压力$p=p(x,y)$。事实上，对于类似给定压力梯度的流动，压力可以写为类似于分离变量的形式：
+</p>
+$$
+p(x,y)=P_x x+p^*(x,y)
+$$<p>
+带回动量方程可以发现，给定的压力梯度在这里处理为了一种动量方程的源项；事实上，OpenFOAM示例算例<strong>planarPoiseuille</strong>中便做了类似的处理来添加压力梯度（fvModels，semiImplicitSource）。$p^*(x,y)$的意义稍后会提到。</p>
+<p>另外有连续性方程来封闭方程组：
+</p>
+$$
+\frac{\partial u}{\partial x}+\frac{\partial v}{\partial y}=0
+$$<p>
+很容易发现，这三个方程中压力和速度是强耦合的，数值构造的难度与之前提到的一维问题天壤之别。究其原因，是引入了第二个方向后，需要同时考虑<strong>不均匀的压力分布和连续性方程</strong>。</p>
+<p>然而数学和自然是统一的。二者同时加入了封闭的系统，二者也必然能相互封闭，两难自解。</p>
+<h2 id="22-以压力为媒压力修正法">2.2 以压力为媒：压力修正法
+</h2><p>我们自然而然地想到：可不可以先求解动量方程，再让压力和连续性方程相互满足？</p>
+<p>这便是压力修正法的基本思路——先假定压力分布，求解动量方程得到预测速度，再反过头来求解压力，并修正速度，使得速度可以满足连续性方程。</p>
+<p>在流体力学中，有关压力的方程为泊松方程。事实上，<strong>压力泊松方程</strong>的推导形式与连续性方程极为相似，即对动量方程求散度，带入连续性条件得到：
+</p>
+$$
+\nabla^2p=\rho((\frac{\partial u}{\partial x})^2+(\frac{\partial v}{\partial y})^2+2\frac{\partial u}{\partial y}\frac{\partial v}{\partial x})
+$$<p>该方程的推导过程中，代入离散形式和预估变量，即可得到<strong>压力修正方程</strong>。压力修正方程的一般形式为：
+</p>
+$$
+\nabla^2p=f(u)
+$$<p>
+其中$f(u)$为源项，往往为<strong>预估速度的连续性误差</strong>。该部分内容会在后续文章中详细介绍。由此可见，方程的连续性在压力修正法中通过压力得到了体现；相较于连续性的零散度，多出来的速度散度，也即体积膨胀，通过压力“压缩”进行补偿。</p>
+<p>回到我们之前讨论的Poiseuille流问题：很显然，给定的压力梯度并不体现在修正方程中。可以不充分但不失一般性地认为，在求解这一问题过程中，相较于一维问题，二维问题引入的垂向速度在原有压力梯度的基础上引入了额外的压力分布，其正是压力修正的主角；也可以发现，独立于原有压力梯度，新引入的压力分布和垂向速度构成封闭和自洽，可以窥见压力修正法的基本思想。</p>
+<p>得到压力后，基于该压力值修正速度，进行迭代，即可获得同时满足连续性方程和动量方程的速度值。</p>
+<h1 id="三-simple的基本流程">三 SIMPLE的基本流程
+</h1><p>总结而言，SIMPLE算法在每一个迭代步内包含以下步骤：</p>
+<ul>
+<li>
+<p><strong>预测步</strong>：根据假定压力（或上一步压力）计算动量方程</p>
+</li>
+<li>
+<p><strong>修正步</strong>：求解压力修正方程，修正压力和速度</p>
+</li>
+<li>
+<p>根据速度计算其他输运量</p>
+</li>
+</ul>
+<p>整体程序实现如下框图所示：</p>
+<img src="SIMPLE.png" alt="Image Alt Text" style="width: 80%; height: auto;">
 
 </section>
 
@@ -527,9 +449,9 @@ $$<p>
     
     <section class="article-tags">
         
-            <a href="/tags/%E6%B5%B8%E6%B2%A1%E8%BE%B9%E7%95%8C%E6%B3%95/">浸没边界法</a>
+            <a href="/tags/%E6%89%8B%E6%92%95%E6%B1%82%E8%A7%A3%E5%99%A8/">手撕求解器</a>
         
-            <a href="/tags/%E5%A4%9A%E7%9B%B8%E6%B5%81/">多相流</a>
+            <a href="/tags/cfd%E5%9F%BA%E7%A1%80/">CFD基础</a>
         
     </section>
 
@@ -589,30 +511,6 @@ $$<p>
             
                 
 <article class="has-image">
-    <a href="/p/simple1/">
-        
-        
-            <div class="article-image">
-                <img src="/p/simple1/cfd.a047971b76b215d35fc8fba97c4b987d_hu_1885363ae48ef263.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post CFD算法 - SIMPLE(1)：基础思路"
-                        data-key="SIMPLE1" 
-                        data-hash="md5-oEeXG3ayFdNfyPupfEuYfQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">CFD算法 - SIMPLE(1)：基础思路</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/p/oversetgrid/">
         
         
@@ -630,6 +528,30 @@ $$<p>
 
         <div class="article-details">
             <h2 class="article-title">CFD算法 - 重叠网格技术</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/test-chinese/">
+        
+        
+            <div class="article-image">
+                <img src="/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.46f61e8ea6a2df8fc5bf1d24a17c44a6_hu_57b7cab9514860c.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 综合测试"
+                        data-key="test-chinese" 
+                        data-hash="md5-RvYejqai34/Fvx0koXxEpg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">综合测试</h2>
         </div>
     </a>
 </article>
